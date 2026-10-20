@@ -1,0 +1,2 @@
+# CircuitPython libraries for the board: circup install -r requirements.txt
+adafruit-circuitpython-ble

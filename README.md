@@ -44,8 +44,15 @@ RAM until a `save_cfg` command.
 ## Install
 
 1. Install CircuitPython 9.x or 10.x for the Matrix Portal S3.
-2. From the [library bundle](https://circuitpython.org/libraries), copy
-   `adafruit_ble/` to `CIRCUITPY/lib/`.
+2. Install the libraries in [requirements.txt](requirements.txt) with
+   [circup](https://github.com/adafruit/circup), with the board plugged in:
+
+   ```bash
+   circup install -r requirements.txt
+   ```
+
+   Or copy `adafruit_ble/` from the
+   [library bundle](https://circuitpython.org/libraries) to `CIRCUITPY/lib/` by hand.
 3. Copy `code.py`, `badge_anim.py` and `badge_store.py` to `CIRCUITPY/`.
 4. Optionally copy `settings.toml.example` to `CIRCUITPY/settings.toml` and edit it
    to set the color, pixel scale, name, starting brightness or PIN.
