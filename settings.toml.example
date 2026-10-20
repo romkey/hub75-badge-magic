@@ -1,0 +1,24 @@
+# Copy to settings.toml on the CIRCUITPY drive and edit. Every setting is optional.
+
+# Name advertised over Bluetooth until a client sets another one (max 20 bytes).
+BADGE_NAME = "LED Badge Magic"
+
+# LED color as 0xRRGGBB.
+BADGE_COLOR = "0xFF0000"
+
+# Matrix pixels per badge LED. 1x2 (default) shows 64x11 badge LEDs in a 64x22
+# band; 2x2 shows 32x11 square LEDs (frames of the badge's 44 columns get
+# cropped); 1x1 is a 64x11 strip.
+BADGE_PIXEL_W = 1
+BADGE_PIXEL_H = 2
+
+# Starting brightness 0..3 (25%..100%) until a client sets and saves one.
+BADGE_BRIGHTNESS = 1
+
+# Four digits turn on SECURITY: uploads need this PIN first (quote it so a
+# leading zero survives). Leave empty for no PIN.
+BADGE_PIN = ""
+
+# Panel size.
+BADGE_MATRIX_WIDTH = 64
+BADGE_MATRIX_HEIGHT = 32

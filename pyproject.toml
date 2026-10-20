@@ -1,0 +1,35 @@
+# Tooling only: the CircuitPython program itself is copied to CIRCUITPY as-is.
+[project]
+name = "hub75-badge-magic"
+version = "1.0.0"
+description = "Badge Magic LED badge emulator for the Adafruit Matrix Portal S3 and a HUB75 panel"
+license = "MIT"
+requires-python = ">=3.13"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "badgemagic-ble @ git+https://github.com/romkey/hass-badgemagic#subdirectory=badgemagic-ble",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "PL", "RUF"]
+ignore = [
+    "PLR0911", "PLR0912", "PLR0913", "PLR0915", "PLR2004",  # protocol parsers are branchy and full of byte values
+    "SIM108",   # explicit if/else reads better in the animation port
+    "UP031", "UP032",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["PLC0415", "S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

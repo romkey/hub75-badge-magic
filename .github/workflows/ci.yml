@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install
+        run: uv sync --python 3.13
+      - name: pytest
+        run: uv run pytest -v
+
+  circuitpython:
+    name: CircuitPython ${{ matrix.version }} compile
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ["9.2.9", "10.3.1"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch mpy-cross
+        run: |
+          curl -fsSL -o mpy-cross \
+            "https://adafruit-circuit-python.s3.amazonaws.com/bin/mpy-cross/linux-amd64/mpy-cross-linux-amd64-${{ matrix.version }}.static"
+          chmod +x mpy-cross
+      - name: Compile
+        run: |
+          for f in code.py badge_anim.py badge_store.py; do
+            ./mpy-cross -o /tmp/"${f%.py}".mpy "$f"
+            echo "$f OK"
+          done
